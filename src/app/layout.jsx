@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { inter } from '@/app/ui/font';
+import { inter } from '@/app/ui/fonts';
 
 export const metadata = {
   title: 'MO-PCCO.R3 - NextJS Financial Dashboard',
