@@ -2,6 +2,9 @@
 
 import { sql } from '@vercel/postgres';
 import { redirect } from 'next/navigation';
+import { signIn } from '../../../auth';
+import { AuthError } from 'next-auth';
+import { signOut } from '../../../auth';
 
 export async function createInvoice(formData) {
   const customerId = formData.get('customerId');
@@ -58,4 +61,29 @@ export async function deleteInvoice(formData) {
   }
   await sql`DELETE FROM invoices WHERE id = ${id}`;
   redirect('/ui/invoices');
+}
+
+export async function authenticate(prevState, formData) {
+  try {
+    await signIn('credentials', {
+      redirect: true,
+      redirectTo: '/ui/dashboard',
+      email: formData.get('email'),
+      password: formData.get('password'),
+    });
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid credentials.';
+        default:
+          return 'Something went wrong.';
+      }
+    }
+    throw error;
+  }
+}
+
+export async function signOutAction() {
+  await signOut();
 }
