@@ -9,12 +9,11 @@ export default async function Page({ searchParams }) {
   const totalPages = await fetchCustomersPages(query);
 
   return (
-    <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
-      <div className="flex-grow p-6 md:overflow-y-auto md:p-12">
-        <CustomersTable customers={customers} />
-        <div className="mt-5 flex w-full justify-center">
-          <Pagination totalPages={totalPages} currentPage={currentPage} />
-        </div>
+    <div className="w-full">
+      <div className="mt-4 flex items-center justify-between gap-2 md:mt-8"></div>
+      <CustomersTable customers={customers} />
+      <div className="mt-5 flex w-full justify-center">
+        <Pagination totalPages={totalPages} currentPage={currentPage} />
       </div>
     </div>
   );
