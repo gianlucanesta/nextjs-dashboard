@@ -5,7 +5,6 @@ export default async function EditInvoicePage({ params }) {
   const invoice = await fetchInvoiceById(params.id);
   const customers = await fetchCustomers();
 
-  // Puoi modificare il form per accettare anche i valori iniziali (initialValues)
   return (
     <main>
       <h1 className="mb-4 text-2xl font-bold">Edit Invoice</h1>
